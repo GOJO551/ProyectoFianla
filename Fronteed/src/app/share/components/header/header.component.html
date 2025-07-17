@@ -1,0 +1,53 @@
+<div class="px-4 py-3 lg:px-6 bg-gradient-to-r from-pink-600 via-purple-700 to-pink-800 shadow-md">
+  <div class="flex items-center justify-between">
+    <!-- IZQUIERDA -->
+    <div class="flex items-center space-x-4">
+      <!-- Botón hamburguesa -->
+      <button (click)="toggleSidebar()" aria-expanded="true" aria-controls="sidebar"
+        class="lg:hidden text-white hover:text-pink-300 p-2 rounded-lg hover:bg-purple-900 focus:ring-2 focus:ring-pink-400 transition shadow-sm">
+        <svg id="toggleSidebarMobileHamburger" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd"></path>
+        </svg>
+        <svg id="toggleSidebarMobileClose" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center text-white hover:text-pink-300 transition font-semibold text-xl">
+        <img src="https://cdn-icons-png.flaticon.com/512/3126/3126575.png"
+          alt="AnimeStore Logo" class="h-7 w-7 mr-2 object-contain rounded-full shadow-sm" />
+        <span>AnimeStore</span>
+      </a>
+    </div>
+
+    <!-- DERECHA -->
+    <div class="flex items-center space-x-4">
+      <!-- Botón carrito -->
+      <a routerLink="carrito"
+        class="bg-pink-400 hover:bg-pink-500 text-white rounded-full p-3 shadow-md transition hover:scale-110 flex items-center justify-center">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4"></path>
+          <circle cx="7" cy="21" r="1"></circle>
+          <circle cx="17" cy="21" r="1"></circle>
+        </svg>
+      </a>
+
+      <!-- Botón login -->
+      <a *ngIf="!isLoggedIn" routerLink="/login"
+        class="bg-pink-400 hover:bg-pink-500 text-white px-5 py-2 rounded-full font-medium shadow-md transition hover:scale-105 text-sm">
+        Iniciar sesión
+      </a>
+
+      <!-- Imagen perfil -->
+      <img *ngIf="isLoggedIn"
+        [src]="'https://i.pravatar.cc/40?u=' + randomSeed"
+        alt="Perfil"
+        class="w-9 h-9 rounded-full object-cover border-2 border-pink-300 shadow-md hover:scale-105 transition duration-300 cursor-pointer" />
+    </div>
+  </div>
+</div>

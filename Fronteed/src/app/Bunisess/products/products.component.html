@@ -1,0 +1,83 @@
+<h2 class="titulo-productos">✨ Listado de Productos Anime ✨</h2>
+
+<div class="container page-wrapper" *ngIf="listProductos.length > 0">
+  <div class="page-inner">
+    <div class="row">
+      <div class="el-wrapper" *ngFor="let producto of listProductos" style="position: relative;">
+        
+        <!-- Etiqueta Oferta en la esquina superior de la tarjeta -->
+        <ng-container *ngIf="producto.oferta > 0">
+          <span style="
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #ff94c2, #ff72a2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(255, 115, 171, 0.4);
+            font-family: 'Comic Neue', cursive;
+            user-select: none;
+          ">
+            🌸 Oferta ${{ (producto.precio * (1 - producto.oferta / 100)).toFixed(2) }}
+          </span>
+        </ng-container>
+
+        <div class="box-up">
+          <img
+            class="img"
+            *ngIf="producto.imagen"
+            [src]="'http://localhost:4000/api/misProductos/get-imagen/' + producto.imagen"
+            [alt]="producto.nombre"
+            style="border-radius: 15px; box-shadow: 0 6px 15px rgba(255, 182, 193, 0.6);"
+          />
+          <div class="img-info">
+            <div class="info-inner">
+              <span class="p-name">{{ producto.nombre }}</span>
+              <span class="p-company">{{ producto.descripcion }}</span>
+            </div>
+            <div class="a-size">
+              Stock: <span class="size">{{ producto.stock }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="box-down">
+          <div class="h-bg">
+            <div class="h-bg-inner"></div>
+          </div>
+
+          <a class="cart" (click)="agregarAlCarrito(producto)" style="text-decoration: none;">
+            <span class="price" style="font-family: 'Comic Neue', cursive; font-weight: 700;">
+              <ng-container *ngIf="producto.oferta > 0; else mostrarPrecioNormal">
+                <span style="text-decoration: line-through; color: #bbb;">
+                  ${{ producto.precio.toFixed(2) }}
+                </span>
+                &nbsp; 
+                <span style="color: #ff6f91; font-weight: 900; font-size: 1.1rem;">
+                  ${{ (producto.precio * (1 - producto.oferta / 100)).toFixed(2) }}
+                </span>
+              </ng-container>
+              <ng-template #mostrarPrecioNormal>
+                ${{ producto.precio.toFixed(2) }}
+              </ng-template>
+            </span>
+            <span class="add-to-cart" style="background: #ff72a2; border-radius: 24px; padding: 6px 16px; box-shadow: 0 4px 12px rgba(255, 114, 162, 0.7); cursor: pointer; color: white; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+              <span class="txt">
+                <ng-container *ngIf="!cargandoAgregar[producto._id || '']">Añadir al carrito</ng-container>
+                <ng-container *ngIf="cargandoAgregar[producto._id || '']">Agregando...</ng-container>
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h5 *ngIf="listProductos.length == 0" style="text-align: center; margin-top: 50px; font-family: 'Comic Neue', cursive; color: #c58fcc;">
+  No hay Productos para mostrar 😿
+</h5>

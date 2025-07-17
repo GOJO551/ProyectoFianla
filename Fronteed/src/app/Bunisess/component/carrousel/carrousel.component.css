@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0a3d, #6e1fac);
+  font-family: "Comic Neue", cursive;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: #fff;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 170px);
+  gap: 24px 48px; /* filas 24px, columnas 48px para más espacio lateral */
+  width: 1240px; /* un poco más ancho para más espacio horizontal */
+}
+
+.item {
+  background: linear-gradient(145deg, #4a148c, #7e57c2);
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(126, 87, 194, 0.85);
+  padding: 20px 48px 20px 25px; /* padding derecho aumentado */
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border: 4px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+}
+
+.item:hover {
+  background: linear-gradient(145deg, #7e57c2, #9c27b0);
+  box-shadow: 0 18px 45px rgba(156, 39, 176, 0.95);
+  transform: translateY(-10px);
+  border-color: #ff79c6;
+}
+
+.icon {
+  flex: 0 0 90px;
+  height: 90px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(255 255 255 / 0.3);
+  background-color: #ffd6f0;
+}
+
+/* Iconos por categoría */
+
+/* Fila 1 */
+.item.peluches .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1041/1041916.png");
+  background-color: #ffc1e3;
+}
+.item.figuras .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/4830/4830736.png");
+  background-color: #d1c4e9;
+}
+.item.ropa .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/3343/3343924.png");
+  background-color: #bbdefb;
+}
+
+/* Fila 2 */
+.item.posters .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/4042/4042159.png");
+  background-color: #ffecb3;
+}
+.item.peluches2 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/616/616408.png");
+  background-color: #ffb3c1;
+}
+.item.figuras2 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/2920/2920242.png");
+  background-color: #c2b9e8;
+}
+
+/* Fila 3 */
+.item.ropa2 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/892/892458.png");
+  background-color: #a8d1f5;
+}
+.item.posters2 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/190/190411.png");
+  background-color: #ffde9f;
+}
+.item.peluches3 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/616/616408.png");
+  background-color: #ff9abd;
+}
+
+/* Fila 4 */
+.item.figuras3 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1067/1067427.png");
+  background-color: #b2a9e6;
+}
+.item.ropa3 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1239/1239684.png");
+  background-color: #90c9f9;
+}
+.item.posters3 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/616/616408.png");
+  background-color: #ffd480;
+}
+
+/* Fila 5 */
+.item.peluches4 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/616/616408.png");
+  background-color: #f48fb1;
+}
+.item.figuras4 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/616/616408.png");
+  background-color: #b39ddb;
+}
+.item.ropa4 .icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/616/616408.png");
+  background-color: #81d4fa;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  text-align: left;
+}
+
+.content h2 {
+  font-size: 1.7rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.content span {
+  font-size: 1.15rem;
+  color: #d1c4e9cc;
+  line-height: 1.3;
+  font-weight: 600;
+}

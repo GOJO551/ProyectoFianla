@@ -1,0 +1,79 @@
+<div class="min-h-screen bg-cover bg-center flex flex-col items-center justify-center px-4 py-10"
+     style="background-image: url('https://i.pinimg.com/originals/6c/6d/56/6c6d56e1eebad9b5c36b1786ec5b62d6.jpg');">
+
+  <div class="backdrop-blur-sm bg-white/80 rounded-3xl shadow-2xl w-full max-w-6xl p-10 grid md:grid-cols-2 items-center gap-12 anime-login-container">
+
+    <!-- Texto lateral -->
+    <div>
+      <h2 class="anime-login-titulo text-4xl lg:text-6xl font-extrabold text-pink-600">
+        ¡Bienvenido a AnimeStore! 🌸
+      </h2>
+      <p class="mt-6 text-pink-500 text-base leading-relaxed font-semibold">
+        Inicia sesión para descubrir lo último en figuras, posters, y coleccionables exclusivos.
+      </p>
+      <p class="mt-12 text-pink-700 text-sm">
+        ¿Aún no tienes una cuenta?
+        <a routerLink="/registro" class="text-pink-400 font-bold hover:underline ml-1">Regístrate aquí</a>
+      </p>
+    </div>
+
+    <!-- Formulario -->
+    <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()" class="max-w-md md:ml-auto w-full anime-login-form">
+      <h3 class="text-pink-700 lg:text-4xl text-3xl font-extrabold mb-8 anime-login-subtitulo">Iniciar sesión</h3>
+
+      <div class="space-y-6">
+        <!-- Correo -->
+        <div>
+          <label class="text-sm text-pink-600 font-semibold mb-2 block anime-label">Correo electrónico</label>
+          <input formControlName="correo" type="email" required
+            placeholder="correo@animestore.com"
+            class="anime-input" />
+          <p *ngIf="correo?.touched && correo?.errors?.['required']" class="anime-error">
+            El correo es obligatorio.
+          </p>
+          <p *ngIf="correo?.touched && correo?.errors?.['email']" class="anime-error">
+            Ingresa un correo válido.
+          </p>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+          <label class="text-sm text-pink-600 font-semibold mb-2 block anime-label">Contraseña</label>
+          <input formControlName="contrasena" type="password" required
+            placeholder="Ingresa tu contraseña"
+            class="anime-input" />
+          <p *ngIf="contrasena?.touched && contrasena?.errors?.['required']" class="anime-error">
+            La contraseña es obligatoria.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center">
+            <input id="remember-me" name="remember-me" type="checkbox" class="anime-checkbox" />
+            <label for="remember-me" class="ml-3 block text-sm text-pink-500 font-medium">Recuérdame</label>
+          </div>
+          <div class="text-sm">
+            <a href="#" class="text-pink-400 hover:text-pink-300 font-semibold">
+              ¿Olvidaste tu contraseña?
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <button type="submit" [disabled]="loginForm.invalid" class="anime-btn-submit">
+          Iniciar sesión
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Cargando... -->
+  <div *ngIf="cargando" class="fixed inset-0 z-50 bg-white bg-opacity-90 flex items-center justify-center">
+    <div class="text-center">
+      <div class="w-12 h-12 border-4 border-pink-300 border-t-pink-600 rounded-full animate-spin mx-auto"></div>
+      <p class="mt-4 text-lg font-semibold text-pink-600">{{ mensajeCarga }}</p>
+    </div>
+  </div>
+
+</div>

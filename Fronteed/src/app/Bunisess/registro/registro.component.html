@@ -1,0 +1,73 @@
+<div class="min-h-screen bg-cover bg-center flex flex-col items-center justify-center px-4 py-10"
+  style="background-image: url('https://i.pinimg.com/originals/ff/85/cc/ff85cc3de51c270b8b2e87b7e1f03bc0.jpg'); /* Fondo anime pastel */">
+
+  <div
+    class="grid md:grid-cols-2 items-center gap-10 max-w-6xl max-md:max-w-md w-full bg-pink-50/70 backdrop-blur-md p-10 rounded-3xl shadow-lg border-2 border-pink-300">
+
+    <!-- Columna izquierda: texto informativo -->
+    <div>
+      <h2 class="lg:text-5xl text-3xl font-extrabold leading-tight text-pink-600 drop-shadow-md font-['Comic_Sans_MS', cursive]">
+        ¡Crea tu cuenta gratis!
+      </h2>
+      <p class="text-sm mt-6 text-pink-700 font-semibold leading-relaxed tracking-wide font-['Comic_Sans_MS', cursive]">
+        Regístrate para acceder a promociones exclusivas y realizar compras kawaii de forma rápida y segura.
+      </p>
+      <p class="text-sm mt-12 text-pink-700 font-medium font-['Comic_Sans_MS', cursive]">
+        ¿Ya tienes una cuenta?
+        <a routerLink="/login" class="text-pink-500 font-bold hover:underline ml-1 cursor-pointer">Inicia sesión aquí</a>
+      </p>
+    </div>
+
+    <!-- Columna derecha: formulario -->
+    <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()"
+      class="max-w-md md:ml-auto w-full bg-white/60 backdrop-blur-lg p-8 rounded-2xl shadow-xl border-4 border-pink-300">
+
+      <h3 class="text-pink-700 lg:text-3xl text-2xl font-extrabold mb-8 font-['Comic_Sans_MS', cursive]">Registro</h3>
+
+      <div class="space-y-5">
+        <!-- Correo -->
+        <div>
+          <input type="email" formControlName="correo" placeholder="✉️ Correo"
+            class="w-full px-5 py-3 border-2 border-pink-300 rounded-xl bg-pink-100 text-pink-700 text-base font-semibold font-['Comic_Sans_MS', cursive] focus:outline-none focus:ring-4 focus:ring-pink-400 focus:bg-white transition" />
+          <p *ngIf="correo?.touched && correo?.errors?.['required']" class="text-red-500 text-sm mt-1 font-bold">¡El correo es obligatorio!</p>
+          <p *ngIf="correo?.touched && correo?.errors?.['email']" class="text-red-500 text-sm mt-1 font-bold">Por favor, ingresa un correo válido.</p>
+        </div>
+
+        <!-- Contraseña -->
+        <div>
+          <input type="password" formControlName="contrasena" placeholder="🔒 Contraseña"
+            class="w-full px-5 py-3 border-2 border-pink-300 rounded-xl bg-pink-100 text-pink-700 text-base font-semibold font-['Comic_Sans_MS', cursive] focus:outline-none focus:ring-4 focus:ring-pink-400 focus:bg-white transition" />
+          <p *ngIf="contrasena?.touched && contrasena?.errors?.['required']" class="text-red-500 text-sm mt-1 font-bold">¡La contraseña es obligatoria!</p>
+        </div>
+
+        <!-- Nombre -->
+        <div>
+          <input type="text" formControlName="nombre" placeholder="🌸 Nombre"
+            class="w-full px-5 py-3 border-2 border-pink-300 rounded-xl bg-pink-100 text-pink-700 text-base font-semibold font-['Comic_Sans_MS', cursive] focus:outline-none focus:ring-4 focus:ring-pink-400 focus:bg-white transition" />
+          <p *ngIf="nombre?.touched && nombre?.errors?.['required']" class="text-red-500 text-sm mt-1 font-bold">¡El nombre es obligatorio!</p>
+          <p *ngIf="nombre?.touched && nombre?.errors?.['pattern']" class="text-red-500 text-sm mt-1 font-bold">Solo letras y espacios, por favor.</p>
+        </div>
+
+        <!-- Apellido -->
+        <div>
+          <input type="text" formControlName="apellido" placeholder="🌸 Apellido"
+            class="w-full px-5 py-3 border-2 border-pink-300 rounded-xl bg-pink-100 text-pink-700 text-base font-semibold font-['Comic_Sans_MS', cursive] focus:outline-none focus:ring-4 focus:ring-pink-400 focus:bg-white transition" />
+          <p *ngIf="apellido?.touched && apellido?.errors?.['required']" class="text-red-500 text-sm mt-1 font-bold">¡El apellido es obligatorio!</p>
+          <p *ngIf="apellido?.touched && apellido?.errors?.['pattern']" class="text-red-500 text-sm mt-1 font-bold">Solo letras y espacios, por favor.</p>
+        </div>
+
+        <!-- Teléfono -->
+        <div>
+          <input type="tel" formControlName="telefono" placeholder="📞 Teléfono (opcional)"
+            class="w-full px-5 py-3 border-2 border-pink-300 rounded-xl bg-pink-100 text-pink-700 text-base font-semibold font-['Comic_Sans_MS', cursive] focus:outline-none focus:ring-4 focus:ring-pink-400 focus:bg-white transition" />
+          <p *ngIf="telefono?.touched && telefono?.errors?.['pattern']" class="text-red-500 text-sm mt-1 font-bold">Solo números permitidos.</p>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="registroForm.invalid"
+        class="w-full mt-8 bg-gradient-to-r from-pink-400 to-pink-600 text-white font-extrabold py-3 rounded-full shadow-lg hover:brightness-110 transition duration-300 cursor-pointer font-['Comic_Sans_MS', cursive]">
+        ¡Registrarme!
+      </button>
+    </form>
+  </div>
+</div>
