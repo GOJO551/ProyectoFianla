@@ -1,10 +1,10 @@
-export class Usuarios {
-    _id?: number;
-    correo: string;
-    contrasena: string;
-    
-    constructor(correo: string, contrasena: string) {
-        this.correo = correo;
-        this.contrasena = contrasena;
-    }
+export interface Usuario {
+  id: number;
+  email: string;
+  password: string;
+  nombre: string;
+  apellido?: string;
+  correo?: string;
+  telefono?: string;
+  rol?: string;
 }

@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SidebarService } from '../../../services/sidebar';
 import { LogoutService } from '../../../services/logout.service';
 import { Router } from '@angular/router';
 import { CategoriaService, Categoria } from '../../../services/categoria.service';
-import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 
 @Component({
@@ -13,7 +12,7 @@ import { PLATFORM_ID } from '@angular/core';
   standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
   rol: string = 'cliente';
@@ -21,7 +20,6 @@ export class SidebarComponent implements OnInit {
   isVisible = false;
   mostrarCategorias: boolean = false;
   saliendo: boolean = false;
-  
 
   constructor(
     private sidebarService: SidebarService,
@@ -30,23 +28,22 @@ export class SidebarComponent implements OnInit {
     private categoriaService: CategoriaService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
-    this.sidebarService.sidebarVisible$.subscribe((visible) => {
+    this.sidebarService.sidebarVisible$.subscribe((visible: boolean) => {
       this.isVisible = visible;
     });
   }
 
-  ngOnInit() {
-    // Solo ejecutar si estamos en el navegador
+  ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
       this.rol = usuario?.rol || 'cliente';
     }
 
     this.categoriaService.obtenerCategorias().subscribe({
-      next: (data) => {
+      next: (data: Categoria[]) => {
         this.categorias = data;
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al obtener categorías', err);
       }
     });
@@ -56,26 +53,25 @@ export class SidebarComponent implements OnInit {
     this.mostrarCategorias = !this.mostrarCategorias;
   }
 
-  cerrarSesion() {
+  cerrarSesion(): void {
     this.saliendo = true;
-  
+
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('usuario');
     }
-  
+
     this.logoutService.logout().subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log(res.mensaje);
         setTimeout(() => {
           this.saliendo = false;
           this.router.navigate(['']);
-        }, 1500); // retardo para mostrar el mensaje
+        }, 1500);
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al cerrar sesión', err);
         this.saliendo = false;
       }
     });
   }
-  
 }

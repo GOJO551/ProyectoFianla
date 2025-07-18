@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarritoService } from '../../services/carrito.service';
+import { ProductoService } from '../../services/producto.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-//No borrar esta liena
 import { ChangeDetectorRef } from '@angular/core';
+import { CarritoItem } from '../../models/carrito-item';
 
 @Component({
   selector: 'app-carrito',
@@ -14,24 +15,21 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit, OnDestroy {
-  items: any[] = [];
+  items: CarritoItem[] = [];
   cargando = false;
-
   private carritoSub!: Subscription;
 
-  constructor(private carritoService: CarritoService,
+  constructor(
+    private carritoService: CarritoService,
+    private productoService: ProductoService,
     private router: Router,
-    //No borrar esta liena
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.cargarCarrito();
-
-    // Suscribirse para recargar carrito automáticamente cuando haya cambios
     this.carritoSub = this.carritoService.carritoActualizado.subscribe(() => {
       this.cargarCarrito();
-
     });
   }
 
@@ -39,13 +37,24 @@ export class CarritoComponent implements OnInit, OnDestroy {
     this.carritoSub.unsubscribe();
   }
 
-  cargarCarrito() {
+  cargarCarrito(): void {
     this.cargando = true;
     this.carritoService.obtenerItems().subscribe({
-      next: (data) => {
-        this.items = data || [];
-        this.cargando = false;
-        this.cdr.detectChanges();
+      next: (items: CarritoItem[]) => {
+        this.productoService.getProductos().subscribe({
+          next: (productos) => {
+            this.items = items.map(item => ({
+              ...item,
+              producto: productos.find(p => p.id === item.productoId)
+            }));
+            this.cargando = false;
+            this.cdr.detectChanges();
+          },
+          error: () => {
+            this.items = [];
+            this.cargando = false;
+          }
+        });
       },
       error: () => {
         this.items = [];
@@ -62,51 +71,44 @@ export class CarritoComponent implements OnInit, OnDestroy {
     }, 0);
   }
 
-  removeItem(item: any) {
+  removeItem(item: CarritoItem): void {
     if (this.cargando) return;
     this.cargando = true;
-    this.carritoService.eliminarItem(item._id).subscribe({
+    this.carritoService.eliminarItem(item.id).subscribe({
       next: () => this.cargando = false,
       error: () => this.cargando = false
     });
   }
 
-  increaseQuantity(item: any) {
+  increaseQuantity(item: CarritoItem): void {
     if (this.cargando) return;
     const nuevaCantidad = (item.cantidad || 0) + 1;
     this.cargando = true;
-    this.carritoService.actualizarCantidad(item._id, nuevaCantidad).subscribe({
+    this.carritoService.actualizarCantidad(item.id, nuevaCantidad).subscribe({
       next: () => this.cargando = false,
       error: () => this.cargando = false
     });
   }
 
-  decreaseQuantity(item: any) {
+  decreaseQuantity(item: CarritoItem): void {
     if (this.cargando) return;
     if ((item.cantidad || 0) <= 1) return;
     const nuevaCantidad = item.cantidad - 1;
     this.cargando = true;
-    this.carritoService.actualizarCantidad(item._id, nuevaCantidad).subscribe({
+    this.carritoService.actualizarCantidad(item.id, nuevaCantidad).subscribe({
       next: () => this.cargando = false,
       error: () => this.cargando = false
     });
   }
 
-  checkout() {
-    console.log('checkout disparado');
+  checkout(): void {
+  const productos = this.items.map(item => ({
+    nombre: item.producto?.nombre || 'Nombre no disponible',
+    precio: item.producto?.precio || 0,
+    cantidad: item.cantidad || 0
+  }));
 
-    const productos = this.items.map(item => ({
-      nombre: item.producto?.nombre || 'Nombre no disponible',
-      precio: item.producto?.precio || 0,
-      cantidad: item.cantidad || 0
-    }));
-
-
-
-    // Guardar productos en localStorage
-    localStorage.setItem('pedidoTemporal', JSON.stringify(productos));
-
-    // Redirigir a la página de confirmación
-    this.router.navigate(['app/confirmacion-pago']);
-  }
+  localStorage.setItem('pedidoTemporal', JSON.stringify(productos));
+  this.router.navigate(['/app/confirmacion-pago']); 
+}
 }

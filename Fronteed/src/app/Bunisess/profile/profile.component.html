@@ -5,7 +5,7 @@
     <!-- Avatar centrado y con sombra -->
     <div class="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
       <img
-        src="https://i.pravatar.cc/128?u={{ usuario.correo }}"
+        src="https://i.pravatar.cc/128?u={{ usuario.email }}"
         alt="Foto de perfil"
         class="w-28 h-28 rounded-full border-6 border-white shadow-lg object-cover"
       />
@@ -15,14 +15,14 @@
   <!-- Contenido del perfil -->
   <div class="pt-20 pb-10 px-8 text-center">
     <h2 class="text-3xl font-semibold text-gray-900">
-      {{ usuario.nombre }} {{ usuario.apellido }}
+      {{ usuario.nombre }}
     </h2>
 
     <p class="mt-3 text-gray-600 text-sm tracking-wide flex items-center justify-center space-x-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M16 12H8m0 0l4-4m-4 4l4 4" />
       </svg>
-      <span>{{ usuario.correo }}</span>
+      <span>{{ usuario.email }}</span>
     </p>
 
     <p class="mt-2 text-gray-600 text-sm flex items-center justify-center space-x-2">
@@ -30,11 +30,11 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M3 10l1.5 1.5a4 4 0 005 0l1-1a4 4 0 000-5L9 3" />
         <path stroke-linecap="round" stroke-linejoin="round" d="M14 14l5 5m0 0l-3 3m3-3l-3-3" />
       </svg>
-      <span><strong>Teléfono:</strong> {{ usuario.telefono || 'No registrado' }}</span>
+      <span><strong>Teléfono:</strong> No registrado</span>
     </p>
 
     <div class="mt-6 inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-6 py-2 rounded-full tracking-wide border border-blue-200">
-      Rol: {{ usuario.rol | titlecase }}
+      Rol: Usuario
     </div>
   </div>
 </div>

@@ -14,7 +14,7 @@
         <th class="py-3 px-6 text-left">Descripción</th>
         <th class="py-3 px-6 text-left">Precio</th>
         <th class="py-3 px-6 text-left">Stock</th>
-        <th class="py-3 px-6 text-left">Categoria</th>
+        <th class="py-3 px-6 text-left">Categoría</th>
         <th class="py-3 px-6 text-left">Oferta</th>
         <th class="py-3 px-6 text-center">Acciones</th>
       </tr>
@@ -23,7 +23,7 @@
       <tr *ngFor="let producto of productosPaginados"
         class="bg-white border-b border-gray-200 hover:shadow-md hover:bg-gray-50 transition-shadow duration-300 cursor-pointer">
         <td class="py-3 px-6">
-          <img *ngIf="producto.imagen" [src]="'http://localhost:4000/api/misProductos/get-imagen/' + producto.imagen"
+          <img *ngIf="producto.imagen" [src]="producto.imagen"
             alt="Imagen"
             class="w-16 h-16 object-cover rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300" />
         </td>
@@ -31,18 +31,19 @@
         <td class="py-3 px-6 text-gray-600 text-sm">{{ producto.descripcion }}</td>
         <td class="py-3 px-6 text-gray-900 font-semibold">${{ producto.precio.toFixed(2) }}</td>
         <td class="py-3 px-6 text-gray-700">{{ producto.stock }}</td>
-        <td class="py-3 px-6 text-gray-700">{{ producto.categoria.nombre }}</td>
-
-        <td class="py-3 px-6 text-sm" [ngClass]="producto.oferta > 0 ? 'text-red-600 font-bold' : 'text-gray-400'">
-          <span *ngIf="producto.oferta > 0">{{ producto.oferta }}%</span>
-          <span *ngIf="producto.oferta === 0">-</span>
+        <td class="py-3 px-6 text-gray-700">
+          {{ producto.categoriaId ? 'Categoría #' + producto.categoriaId : '-' }}
+        </td>
+        <td class="py-3 px-6 text-sm" [ngClass]="producto.oferta && producto.oferta > 0 ? 'text-red-600 font-bold' : 'text-gray-400'">
+          <span *ngIf="producto.oferta && producto.oferta > 0">{{ producto.oferta }}%</span>
+          <span *ngIf="!producto.oferta || producto.oferta === 0">-</span>
         </td>
         <td class="py-3 px-6 flex items-center justify-center space-x-4">
-          <button [routerLink]="['/app/agregarProducto', producto._id]"
+          <button [routerLink]="['/app/agregarProducto', producto.id]"
             class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-1 px-4 rounded-md text-sm shadow-sm transition-colors duration-200">
             Editar
           </button>
-          <button (click)="eliminarProducto(producto._id)"
+          <button (click)="eliminarProducto(producto.id)"
             class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-md text-sm shadow-sm transition-colors duration-200">
             Eliminar
           </button>

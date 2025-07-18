@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:Tienda": "node dist/Tienda/server/server.mjs"
+    "serve:ssr:Tienda": "node dist/Tienda/server/server.mjs",
+    "json-server": "json-server --watch src/assets/db.json --port 3000"
   },
   "prettier": {
     "overrides": [

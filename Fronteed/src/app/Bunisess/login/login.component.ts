@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from '../../services/login.service';
+import { LoginService, Usuario } from '../../services/login.service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
@@ -39,29 +39,34 @@ export class LoginComponent {
 
   iniciarSesion() {
     if (this.loginForm.invalid) return;
-  
+
     this.cargando = true;
     this.mensajeCarga = 'Validando tus credenciales...';
-  
+
     const { correo, contrasena } = this.loginForm.value;
-  
+
     this.loginService.login(correo, contrasena).subscribe({
-      next: (res) => {
-        this.toastr.success('Inicio de sesión exitoso', 'Bienvenido');
-        localStorage.setItem('usuario', JSON.stringify(res.usuario));
-  
-        this.mensajeCarga = 'Cargando tu cuenta...';
-  
-        setTimeout(() => {
+      next: (usuario: Usuario | null) => {
+        if (usuario) {
+          this.toastr.success('Inicio de sesión exitoso', 'Bienvenido');
+          localStorage.setItem('usuario', JSON.stringify(usuario));
+
+          this.mensajeCarga = 'Cargando tu cuenta...';
+
+          setTimeout(() => {
+            this.cargando = false;
+            this.router.navigate(['/app']);
+          }, 1500);
+        } else {
           this.cargando = false;
-          this.router.navigate(['/app']);
-        }, 1500);
+          this.toastr.error('Correo o contraseña incorrectos', 'Error de autenticación');
+        }
       },
       error: (err) => {
         this.cargando = false;
         console.error(err);
-        this.toastr.error('Correo o contraseña incorrectos', 'Error de autenticación');
+        this.toastr.error('Error de conexión con el servidor', 'Error');
       }
     });
   }
-}  
+}

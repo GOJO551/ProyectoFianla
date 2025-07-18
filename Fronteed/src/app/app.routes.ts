@@ -58,10 +58,15 @@ export const routes: Routes = [
       },
     
       {
-        path: 'proveedores',
-        loadComponent: () =>
-          import('./Bunisess/prov/prov').then((m) => m.Prov)
-      }
+  path: 'proveedores',
+  loadComponent: () =>
+    import('./Bunisess/prov/prov').then((m) => m.Prov)
+},
+{
+  path: 'confirmacion-pago',
+  loadComponent: () =>
+    import('./Bunisess/confirmacion-pago/confirmacion-pago.component').then(m => m.ConfirmacionPagoComponent)
+}
 
 
 

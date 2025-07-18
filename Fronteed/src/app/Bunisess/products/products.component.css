@@ -258,3 +258,118 @@ html, body {
 .el-wrapper {
   margin: 0; /* quitamos auto para buen comportamiento flex */
 }
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.producto-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.imagen-container {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.producto-imagen {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.producto-card:hover .producto-imagen {
+  transform: scale(1.05);
+}
+
+.oferta-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #ec4899;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.producto-nombre {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ec4899;
+  margin-bottom: 0.25rem;
+}
+
+.producto-descripcion {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.producto-stock {
+  font-size: 0.85rem;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.producto-precio {
+  margin-bottom: 0.75rem;
+}
+
+.precio-original {
+  text-decoration: line-through;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.precio-oferta {
+  color: #ec4899;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-left: 0.5rem;
+}
+
+.precio-final {
+  color: #ec4899;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.boton-agregar {
+  background: #ec4899;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.boton-agregar:hover {
+  background: #db2777;
+}
+
+.mensaje-vacio {
+  text-align: center;
+  margin-top: 2rem;
+  color: #6b7280;
+  font-size: 1rem;
+}

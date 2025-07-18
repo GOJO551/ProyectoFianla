@@ -1,0 +1,145 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "email": "admin@admin.com",
+      "password": "admin123",
+      "nombre": "Admin",
+      "rol": "admin"
+    },
+    {
+      "id": 2,
+      "email": "david@demo.com",
+      "password": "clave123",
+      "nombre": "David",
+      "rol": "cliente"
+    }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Taza conejito",
+      "descripcion": "Taza adorable con orejas",
+      "precio": 12.5,
+      "imagen": "https://tse2.mm.bing.net/th/id/OIP.0799dLVXm-v0O9N1GtAyWQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 5,
+      "oferta": 20,
+      "categoriaId": 1
+    },
+    {
+      "id": 2,
+      "nombre": "Camiseta pastel",
+      "descripcion": "Camiseta con diseño kawaii",
+      "precio": 19.99,
+      "imagen": "https://tse4.mm.bing.net/th/id/OIP.CRIwvhXMxzlPyZ7YWu7QOQHaHa?r=0&pid=ImgDet&w=474&h=474&rs=1&o=7&rm=3",
+      "stock": 10,
+      "oferta": 0,
+      "categoriaId": 3
+    },
+    {
+      "id": 3,
+      "nombre": "Poster Sakura",
+      "descripcion": "Poster decorativo estilo anime",
+      "precio": 8.99,
+      "imagen": "https://tse4.mm.bing.net/th/id/OIP.NdKJ1g7Exp4GyGkYmpyAMAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 15,
+      "oferta": 10,
+      "categoriaId": 2
+    },
+    {
+      "id": 4,
+      "nombre": "Llavero Totoro",
+      "descripcion": "Llavero suave con diseño de Totoro",
+      "precio": 5.5,
+      "imagen": "https://tse1.mm.bing.net/th/id/OIP.tVSm3UY4LzJ4dFnv9-sdsQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 20,
+      "oferta": 5,
+      "categoriaId": 4
+    },
+    {
+      "id": 5,
+      "nombre": "Cuaderno Chibi",
+      "descripcion": "Cuaderno con ilustraciones chibi",
+      "precio": 7.25,
+      "imagen": "https://tse3.mm.bing.net/th/id/OIP.YeqFIkbd5Z2XjdIJBZcAaQHaHt?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 12,
+      "oferta": 15,
+      "categoriaId": 4
+    },
+    {
+      "id": 6,
+      "nombre": "Sticker Pack",
+      "descripcion": "Set de stickers anime pastel",
+      "precio": 3.99,
+      "imagen": "https://tse1.mm.bing.net/th/id/OIP.FIYGD_TCNvdCVQaCGOgVLgHaHX?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 30,
+      "oferta": 0,
+      "categoriaId": 4
+    },
+    {
+      "id": 7,
+      "nombre": "Peluche Pompompurin",
+      "descripcion": "Peluche suave y adorable",
+      "precio": 22,
+      "imagen": "https://tse4.mm.bing.net/th/id/OIP.7-eDYi0uKmd8SV0hMdlOegHaJQ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "stock": 8,
+      "oferta": 25,
+      "categoriaId": 4
+    },
+    {
+      "id": 8,
+      "nombre": "Bolso Kawaii",
+      "descripcion": "Bolso con estampado de gatitos",
+      "precio": 18.75,
+      "imagen": "https://comprarbuenobarato.com/img/upload/productos/bolso/bolso-kawaii.jpg",
+      "stock": 6,
+      "oferta": 10,
+      "categoriaId": 4
+    }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "Tazas"
+    },
+    {
+      "id": 2,
+      "nombre": "Posters"
+    },
+    {
+      "id": 3,
+      "nombre": "Ropa"
+    },
+    {
+      "id": 4,
+      "nombre": "Accesorios"
+    }
+  ],
+  "carrito": [
+    {
+      "id": 1,
+      "productoId": 1,
+      "cantidad": 2
+    },
+    {
+      "id": "021e",
+      "productoId": 2,
+      "cantidad": 1
+    },
+    {
+      "id": "8304",
+      "productoId": 1,
+      "cantidad": 1
+    },
+    {
+      "id": "13d7",
+      "productoId": 3,
+      "cantidad": 1
+    },
+    {
+      "id": "5f57",
+      "productoId": 8,
+      "cantidad": 1
+    }
+  ]
+}

@@ -1,32 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Usuario {
-  correo: string;
+  id: number;
+  email: string;
+  password: string;
   nombre: string;
-  apellido: string;
-  telefono?: string;
-  rol: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class LoginService {
-  private URL = 'http://localhost:4000/api/loginUser';
+  private apiUrl = 'http://localhost:3000/usuarios';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  login(correo: string, contrasena: string): Observable<any> {
-    const body = { correo, contrasena };
-    return this.http.post(`${this.URL}/login`, body, {
-      withCredentials: true
-    });
+  login(email: string, password: string): Observable<Usuario | null> {
+    return this.http.get<Usuario[]>(`${this.apiUrl}?email=${email}&password=${password}`).pipe(
+      map(users => users.length ? users[0] : null)
+    );
   }
-  getUsuarioSesion(): Observable<Usuario> {
-    return this.http.get<Usuario>(`${this.URL}/usuarioSesion`, { withCredentials: true });
-  }
-
-
-  }
+}
